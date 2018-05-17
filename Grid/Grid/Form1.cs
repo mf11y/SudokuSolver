@@ -12,17 +12,23 @@ namespace Grid
 {
     public partial class Form1 : Form
     {
-        int mouseClickX;
-        int mouseClickY;
+        int mouseCoordsX;
+        int mouseCoordsY;
+        int historyPrevClickX = -1;
+        int historyPrevClickY = -1; 
+
+        bool isInBoard = false;
+        bool activelyReadin = false;
 
         public Form1()
         {
             InitializeComponent();
         }
 
+
+        //Paint Grid Lines
         private void Panel1_Paint(object sender, PaintEventArgs e)
         {
-            //this.ResizeRedraw = true;
             Graphics gr = e.Graphics;
             Pen myPen = new Pen(Brushes.Black, 1);
             Font myFont = new Font("Arial", 10);
@@ -62,32 +68,73 @@ namespace Grid
             
         }
 
+        //When mouse clicked inside panel, get location
         private void P1_Click(object sender, EventArgs e)
         {
-            mouseClickX = panel1.PointToClient(Cursor.Position).X;
-            mouseClickY = panel1.PointToClient(Cursor.Position).Y;
+            isInBoard = true;
+            bool inSameBox = false;
 
+            Graphics gr = panel1.CreateGraphics();
+            Font myFont = new Font("Arial", 10);
+
+            mouseCoordsX = panel1.PointToClient(Cursor.Position).X;
+            mouseCoordsY = panel1.PointToClient(Cursor.Position).Y;
+
+            int drawX = (mouseCoordsX / 40) * 40;
+            int drawY = (mouseCoordsY / 40) * 40;
+
+            Rectangle rect = new Rectangle(drawX + 14, drawY + 12, 20, 20);
+            gr.FillRectangle(Brushes.White, rect);
+
+
+            gr.DrawString("?", myFont, Brushes.Black, drawX + 14, drawY + 12);
+
+            if (historyPrevClickX == drawX && historyPrevClickY == drawY)
+                inSameBox = true;
+            /*
+            if(inSameBox)
+            {
+                gr.FillRectangle(Brushes.White, rect);
+            }*/
+
+            if (activelyReadin && !inSameBox)
+            {
+                Rectangle rect2 = new Rectangle(historyPrevClickX + 14, historyPrevClickY + 12, 20, 20);
+                gr.FillRectangle(Brushes.White, rect2);
+            }
+
+            activelyReadin = true;
+
+
+            historyPrevClickX = drawX;
+            historyPrevClickY = drawY;
         }
 
-
+        //Check for Keypresses
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (mouseClickX != 0)
+            if (isInBoard)
             {
                 Graphics gr = panel1.CreateGraphics();
-                Pen myPen = new Pen(Brushes.Black, 1);
+
                 Font myFont = new Font("Arial", 10);
 
-                int drawX = (mouseClickX / 40) * 40;
-                int drawY = (mouseClickY / 40) * 40;
+                int drawX = (mouseCoordsX / 40) * 40;
+                int drawY = (mouseCoordsY / 40) * 40;
 
                 char number = (char)e.KeyValue;
 
-                if(number >= '0' && number <= '9' )
+                Rectangle rect = new Rectangle(drawX + 14, drawY + 12, 20, 20);
+                gr.FillRectangle(Brushes.White, rect);
+
+                if (number >= '0' && number <= '9')
+                {
                     gr.DrawString(number.ToString(), myFont, Brushes.Black, drawX + 14, drawY + 12);
+                }
+                activelyReadin = false;
             }
-            mouseClickX = 0;
-            mouseClickY = 0;
+
+            isInBoard = false;
         }
     }
 }
