@@ -1,6 +1,6 @@
-﻿namespace Grid
+﻿namespace Sudoku
 {
-    partial class Form1
+    partial class Game
     {
         /// <summary>
         /// Required designer variable.
