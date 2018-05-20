@@ -26,9 +26,15 @@ namespace Sudoku
             }
         }
 
-        public void insertIntoBoard(int x, int y, int val)
+        public bool insertIntoBoard(int Horizontal, int Vertical, int val)
         {
-            gameBoard[y][x] = val;
+            if (isValidNum(Horizontal, Vertical, val))
+            {
+                gameBoard[Vertical][Horizontal] = val;
+                return true;
+            }
+
+            return false;
         }
 
         public string printBoard()
@@ -45,6 +51,31 @@ namespace Sudoku
             }
 
             return start;
+        }
+
+        public bool isValidNum(int Horizontal, int Vertical, int val)
+        {
+            List<int> temp = new List<int>();
+            List<int> temp2= new List<int>();
+
+            for (int i = 0; i < gameBoard.Count();i++)
+                temp.Add(gameBoard[i][Horizontal]);
+
+            int x = (Vertical / 3) * 3;
+            int y = (Horizontal / 3) * 3;
+
+            for(int i = x; i < x + 3; i++)
+            {
+                for(int j = y; j < y + 3; j++)
+                {
+                    temp2.Add(gameBoard[i][j]);
+                }
+            }
+
+            if (temp.Contains(val) || gameBoard[Vertical].Contains(val) || temp2.Contains(val))
+                return false;
+            else
+                return true;
         }
 
     }

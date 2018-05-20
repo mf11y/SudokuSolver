@@ -15,7 +15,7 @@ namespace Sudoku
         bool inputReceptive = false;
         bool switchedBoxMidInput = false;
 
-        Board board = new Board();
+        Board board = new Board(); 
 
         const int xOffset = 14;
         const int yOffset = 12;
@@ -67,8 +67,6 @@ namespace Sudoku
                 gr.DrawLine(myPen, x, y, linelength, y);
                 y += squareSize;
             }
-
-            
         }
 
         //When mouse clicked inside panel, get location
@@ -89,6 +87,8 @@ namespace Sudoku
             if (switchedBoxMidInput)
                 EraseBox();
 
+            //MessageBox.Show(clickedBoxCoordsX.ToString());
+
             inputReceptive = true;
             historyPrevClickX = clickedBoxCoordsX;
             historyPrevClickY = clickedBoxCoordsY;
@@ -106,28 +106,20 @@ namespace Sudoku
                 if (keyPressed >= '0' && keyPressed <= '9')
                 {
                     string num = keyPressed.ToString();
-                    board.insertIntoBoard(clickedBoxCoordsX / 40 , clickedBoxCoordsY / 40, Int32.Parse(num));
-                    DrawInBox(num);
+                    if(board.insertIntoBoard(clickedBoxCoordsX / 40 , clickedBoxCoordsY / 40, Int32.Parse(num)))
+                        DrawInBox(num);
+
                 }
                 inputReceptive = false;
                 MessageBox.Show(board.printBoard());
             }
-
             boardHasBeenClicked = false;
         }
 
         private void EraseBox()
         {
-            Rectangle rect = new Rectangle();
-            rect.Size = new Size(20, 20);
-
-            if (switchedBoxMidInput)
-                rect.Location = new Point(GetMiddleOfBox("X"), GetMiddleOfBox("Y"));
-            else
-                rect.Location = new Point(GetMiddleOfBox("X"), GetMiddleOfBox("Y"));
-
+            Rectangle rect = new Rectangle(new Point(GetMiddleOfBox("X"), GetMiddleOfBox("Y")), new Size(20,20));
             gr.FillRectangle(Brushes.White, rect);
-
         }
 
         private void DrawInBox(string write)
