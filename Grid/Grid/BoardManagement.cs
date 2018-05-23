@@ -10,46 +10,20 @@ namespace Sudoku
 {
     class BoardManagement
     {
-        Graphics gr;
+        private static readonly int squareSize = 40;
+        Board board;
+        SudokuDrawer drawer;
         Panel activePanel;
-        Font myFont = new Font("Arial", 10);
 
-        Board board = new Board();
-
-        const int squareSize = 40;
-        const int xOffset = 14;
-        const int yOffset = 12;
-
-        public BoardManagement(Panel space)
+        public BoardManagement(Panel pan)
         {
-            activePanel = space;
-            gr = activePanel.CreateGraphics();
+            board = new Board();
+            drawer = new SudokuDrawer(ref board, ref pan);         
+
+            board.ConnectDrawer(ref drawer);
+            activePanel = pan;
         }
 
-        public void DrawBoard()
-        {
-            Pen myPen = new Pen(Brushes.Black, 1);
-
-            int x = 0;
-            int y = 0;
-            int NumLines = 10;
-            int linelength = squareSize * 9;
-
-            for (int i = 0; i < NumLines; i++)
-            {
-                if (i % 3 == 0 && i != 0)
-                    myPen.Width = 3;
-                else
-                    myPen.Width = 1;
-
-                gr.DrawLine(myPen, x, 0, x, linelength);
-                x += squareSize;
-
-                gr.DrawLine(myPen, 0, y, linelength, y);
-                y += squareSize;
-            }
-
-        }
 
         bool boardHasBeenClicked = false;
         bool inputReceptive = false;
@@ -68,14 +42,14 @@ namespace Sudoku
 
             clickedBox = new Point(clickedBoxCoordsX, clickedBoxCoordsY);
 
-            EraseBox(clickedBox);
-            DrawInBox("?", clickedBox);
+            drawer.EraseBox(clickedBox);
+            drawer.DrawInBox("?", clickedBox);
 
             if ((clickedBox != historyClicked) && inputReceptive)
                 switchedBoxMidInput = true;
 
             if (switchedBoxMidInput)
-                EraseBox(historyClicked);
+                drawer.EraseBox(historyClicked);
 
             inputReceptive = true;
 
@@ -86,7 +60,7 @@ namespace Sudoku
         {
             if (boardHasBeenClicked)
             {
-                EraseBox(clickedBox);
+                drawer.EraseBox(clickedBox);
 
                 char keyPressed = (char)e.KeyValue;
 
@@ -94,20 +68,26 @@ namespace Sudoku
                 {
                     string num = keyPressed.ToString();
                     if (board.insertIntoBoard(clickedBox.Y / squareSize, clickedBox.X / squareSize, Int32.Parse(num)))
-                        DrawInBox(num, clickedBox);
+                        drawer.DrawInBox(num, clickedBox);
                 }
                 inputReceptive = false;
             }
             boardHasBeenClicked = false;
         }
 
-        private void EraseBox(Point boxCoords)
+        public void DrawBoard()
         {
-            Rectangle rect = new Rectangle(GetMiddleOfBox(boxCoords), new Size(20, 20));
-            gr.FillRectangle(Brushes.White, rect);
+            drawer.DrawBoard();
         }
-        private void DrawInBox(string write, Point boxCoords) => gr.DrawString(write, myFont, Brushes.Black, GetMiddleOfBox(boxCoords));
 
-        private Point GetMiddleOfBox(Point boxCoords) => new Point(boxCoords.X + xOffset, boxCoords.Y + yOffset);
+        public int Solve()
+        {
+            board.solve2();
+            //await Task.Run(() => board.solve2());
+            drawer.DrawBoard();
+
+            return 1;
+        }
+
     }
 }

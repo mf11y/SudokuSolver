@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace Sudoku
 {
@@ -12,6 +13,7 @@ namespace Sudoku
     {
         private List<List<int>> gameBoard = new List<List<int>>();
         private List<Point> emptyCells= new List<Point>();
+        SudokuDrawer wut;
 
         public Board()
         {
@@ -23,6 +25,11 @@ namespace Sudoku
                     templist.Add(0);
         }
 
+        public void ConnectDrawer(ref SudokuDrawer yo)
+        {
+            wut = yo;
+        }
+
         public bool insertIntoBoard(int i1, int i2, int val)
         {
             if (isValidNum(i1, i2, val))
@@ -32,22 +39,6 @@ namespace Sudoku
             }
             else
                 return false;
-        }
-
-        public string printBoard()
-        {
-            string start = "";
-            foreach(List<int> templist in gameBoard)
-            {
-                foreach(int x in templist)
-                {
-                    start += x.ToString();
-                }
-
-                start += "\n";
-            }
-
-            return start;
         }
 
         public bool isValidNum(int i1, int i2, int val)
@@ -108,7 +99,7 @@ namespace Sudoku
             return false;
         }
 
-        public void solve2()
+        public int solve2()
         {
             FindEmptyCells();
             //Saves which empty cell was just filled
@@ -120,21 +111,26 @@ namespace Sudoku
                 {
                     if(isValidNum(emptyCells[currentEmptyCell].X, emptyCells[currentEmptyCell].Y, potentialCandidate))
                     {
+                        wut.DrawInBox(potentialCandidate.ToString(), new Point(emptyCells[currentEmptyCell].Y * 40, emptyCells[currentEmptyCell].X * 40));
+                        Thread.Sleep(100);
                         gameBoard[emptyCells[currentEmptyCell].X][emptyCells[currentEmptyCell].Y] = potentialCandidate;
                         savedMoves.Push(potentialCandidate);
                         currentEmptyCell++;
                         potentialCandidate = 0;
 
                         if (isFilled())
-                            return;
+                            return 1;
                     }
                 }
                 currentEmptyCell--;
                 potentialCandidate = savedMoves.Peek() + 1;
                 gameBoard[emptyCells[currentEmptyCell].X][emptyCells[currentEmptyCell].Y] = 0;
+                wut.EraseBox(new Point(emptyCells[currentEmptyCell].Y * 40, emptyCells[currentEmptyCell].X * 40));
 
                 savedMoves.Pop();
             }
         }
+
+        public List<List<int>> GetCopy() => gameBoard;
     }
 }
