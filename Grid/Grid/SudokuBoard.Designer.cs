@@ -28,20 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.bufferedPanel1 = new Sudoku.BufferedPanel();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Window;
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel1.Location = new System.Drawing.Point(56, 89);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(360, 360);
-            this.panel1.TabIndex = 0;
-            this.panel1.Click += new System.EventHandler(this.P1_Click);
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
             // button1
             // 
@@ -53,14 +42,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.solve_button);
             // 
+            // bufferedPanel1
+            // 
+            this.bufferedPanel1.Location = new System.Drawing.Point(65, 89);
+            this.bufferedPanel1.Name = "bufferedPanel1";
+            this.bufferedPanel1.Size = new System.Drawing.Size(360, 360);
+            this.bufferedPanel1.TabIndex = 0;
+            this.bufferedPanel1.Click += new System.EventHandler(this.P1_Click);
+            this.bufferedPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.bufferedPanel1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.panel1);
             this.Name = "Game";
             this.Text = "Form1";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
@@ -69,9 +67,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
+        private BufferedPanel bufferedPanel1;
     }
 }
 

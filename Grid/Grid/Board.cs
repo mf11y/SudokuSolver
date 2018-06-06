@@ -13,9 +13,9 @@ namespace Sudoku
     {
         private List<List<int>> gameBoard = new List<List<int>>();
         private List<Point> emptyCells= new List<Point>();
-        SudokuDrawer wut;
+        BufferedPanel pan;
 
-        public Board()
+        public Board(BufferedPanel p)
         {
             for (int i = 0; i < 9; i++)
                 gameBoard.Add(new List<int>());
@@ -23,18 +23,16 @@ namespace Sudoku
             foreach (List<int> templist in gameBoard)
                 for (int i = 0; i < 9; i++)
                     templist.Add(0);
+
+            pan = p;
         }
 
-        public void ConnectDrawer(ref SudokuDrawer yo)
-        {
-            wut = yo;
-        }
 
-        public bool insertIntoBoard(int i1, int i2, int val)
+        public bool insertIntoBoard(Point coords, int val)
         {
-            if (isValidNum(i1, i2, val))
+            if (isValidNum(coords.X, coords.Y, val))
             {
-                gameBoard[i1][i2] = val;
+                gameBoard[coords.X][coords.Y] = val;
                 return true;
             }
             else
@@ -111,7 +109,7 @@ namespace Sudoku
                 {
                     if(isValidNum(emptyCells[currentEmptyCell].X, emptyCells[currentEmptyCell].Y, potentialCandidate))
                     {
-                        wut.DrawInBox(potentialCandidate.ToString(), new Point(emptyCells[currentEmptyCell].Y * 40, emptyCells[currentEmptyCell].X * 40));
+                        pan.Invalidate();
                         Thread.Sleep(100);
                         gameBoard[emptyCells[currentEmptyCell].X][emptyCells[currentEmptyCell].Y] = potentialCandidate;
                         savedMoves.Push(potentialCandidate);
@@ -125,12 +123,17 @@ namespace Sudoku
                 currentEmptyCell--;
                 potentialCandidate = savedMoves.Peek() + 1;
                 gameBoard[emptyCells[currentEmptyCell].X][emptyCells[currentEmptyCell].Y] = 0;
-                wut.EraseBox(new Point(emptyCells[currentEmptyCell].Y * 40, emptyCells[currentEmptyCell].X * 40));
+                pan.Invalidate();
 
                 savedMoves.Pop();
             }
         }
 
         public List<List<int>> GetCopy() => gameBoard;
+
+        public void delete(Point coords)
+        {
+            gameBoard[coords.Y / 40][coords.X / 40] = 0;
+        }
     }
 }
