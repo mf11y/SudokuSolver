@@ -25,34 +25,26 @@ namespace Sudoku
         }
 
         Point clickedBox;
-        Point historyClicked;
 
-        bool erase = false;
-        bool eraseHistory = false;
-        bool draw;
-        bool solve;
+        bool highlight = false;
 
         //Paint Grid Lines
         private void Panel1_Paint(object sender, PaintEventArgs e)
         {
-            if (erase)
+            e.Graphics.Clear(Color.White);
+
+            if(highlight)
             {
-                drawer.EraseBox(e.Graphics, clickedBox);
-                erase = false;
+                Rectangle rect = new Rectangle(new Point(clickedBox.X, clickedBox.Y), new Size(40, 40));
+                e.Graphics.FillRectangle(Brushes.Wheat, rect);
+                highlight = false;
             }
-            else if (eraseHistory)
-            {
-                drawer.EraseBox(e.Graphics, historyClicked);
-                eraseHistory = false;
-            }
-            else
-                drawer.DrawBoard(e.Graphics);
+
+            drawer.DrawBoard(e.Graphics);
         }
 
 
         bool boardHasBeenClicked = false;
-        bool inputReceptive = false;
-        bool switchedBoxMidInput = false;
 
         private static readonly int squareSize = 40;
 
@@ -60,29 +52,15 @@ namespace Sudoku
         private void P1_Click(object sender, EventArgs e)
         {
             boardHasBeenClicked = true;
-            switchedBoxMidInput = false;
 
             int clickedBoxCoordsX = (bufferedPanel1.PointToClient(Cursor.Position).X / squareSize) * squareSize;
             int clickedBoxCoordsY = (bufferedPanel1.PointToClient(Cursor.Position).Y / squareSize) * squareSize;
-            //MessageBox.Show(clickedBoxCoordsX.ToString());
 
-            clickedBox = new Point(clickedBoxCoordsX, clickedBoxCoordsY);
-            erase = true;
+            clickedBox = new Point(clickedBoxCoordsX, clickedBoxCoordsY);  
+            highlight = true;
 
             this.bufferedPanel1.Invalidate();
 
-            //drawer.EraseBox(clickedBox);
-            //drawer.DrawInBox("?", clickedBox);
-
-            if ((clickedBox != historyClicked) && inputReceptive)
-                switchedBoxMidInput = true;
-
-            if (switchedBoxMidInput)
-                //drawer.EraseBox(historyClicked);
-
-                inputReceptive = true;
-
-            historyClicked = new Point(clickedBoxCoordsX, clickedBoxCoordsY);
 
         }
 
@@ -91,8 +69,6 @@ namespace Sudoku
         {
             if (boardHasBeenClicked)
             {
-                //drawer.EraseBox(clickedBox);
-
                 char keyPressed = (char)e.KeyValue;
 
                 if (keyPressed >= '0' && keyPressed <= '9')
@@ -100,7 +76,6 @@ namespace Sudoku
                     string num = keyPressed.ToString();
                     board.insertIntoBoard(new Point(clickedBox.Y / squareSize, clickedBox.X / squareSize), Int32.Parse(num));
                 }
-                inputReceptive = false;
             }
             boardHasBeenClicked = false;
 

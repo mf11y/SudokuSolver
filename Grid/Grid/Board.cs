@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Sudoku
 {
@@ -30,6 +31,8 @@ namespace Sudoku
 
         public bool insertIntoBoard(Point coords, int val)
         {
+
+
             if (isValidNum(coords.X, coords.Y, val))
             {
                 gameBoard[coords.X][coords.Y] = val;
@@ -78,6 +81,15 @@ namespace Sudoku
             return true;
         }
 
+        public int solvee()
+        {
+            FindEmptyCells();
+            solve(0);
+
+
+            return 1;
+        }
+
         public bool solve(int position)
         {
             if(isFilled())
@@ -99,6 +111,7 @@ namespace Sudoku
 
         public int solve2()
         {
+
             FindEmptyCells();
             //Saves which empty cell was just filled
             Stack<int> savedMoves = new Stack<int>();
@@ -117,13 +130,15 @@ namespace Sudoku
                         potentialCandidate = 0;
 
                         if (isFilled())
+                        {
                             return 1;
+                        }
                     }
                 }
                 currentEmptyCell--;
                 potentialCandidate = savedMoves.Peek() + 1;
                 gameBoard[emptyCells[currentEmptyCell].X][emptyCells[currentEmptyCell].Y] = 0;
-                pan.Invalidate();
+                //pan.Invalidate();
 
                 savedMoves.Pop();
             }
