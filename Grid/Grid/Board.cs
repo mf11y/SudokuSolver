@@ -31,9 +31,7 @@ namespace Sudoku
 
         public bool insertIntoBoard(Point coords, int val)
         {
-
-
-            if (isValidNum(coords.X, coords.Y, val))
+            if (isValidNum(coords, val))
             {
                 gameBoard[coords.X][coords.Y] = val;
                 return true;
@@ -42,22 +40,22 @@ namespace Sudoku
                 return false;
         }
 
-        public bool isValidNum(int i1, int i2, int val)
+        public bool isValidNum(Point coords, int val)
         {
             List<int> verticalCheck = new List<int>();
             List<int> quadrantCheck= new List<int>();
 
             for (int i = 0; i < gameBoard.Count();i++)
-                verticalCheck.Add(gameBoard[i][i2]);
+                verticalCheck.Add(gameBoard[i][coords.Y]);
 
-            int x = (i1 / 3) * 3;
-            int y = (i2 / 3) * 3;
+            int x = (coords.X / 3) * 3;
+            int y = (coords.Y / 3) * 3;
 
             for(int i = x; i < x + 3; i++)
                 for(int j = y; j < y + 3; j++)
                     quadrantCheck.Add(gameBoard[i][j]);
 
-            if (verticalCheck.Contains(val) || gameBoard[i1].Contains(val) || quadrantCheck.Contains(val))
+            if (verticalCheck.Contains(val) || gameBoard[coords.X].Contains(val) || quadrantCheck.Contains(val))
                 return false;
             else
                 return true;
@@ -81,34 +79,6 @@ namespace Sudoku
             return true;
         }
 
-        public int solvee()
-        {
-            FindEmptyCells();
-            solve(0);
-
-
-            return 1;
-        }
-
-        public bool solve(int position)
-        {
-            if(isFilled())
-                return true;
-
-            for(int i = 1; i < 10; i++)
-            {
-                if (isValidNum(emptyCells[position].X, emptyCells[position].Y, i))
-                {
-                    gameBoard[emptyCells[position].X][emptyCells[position].Y] = i;
-                    if (solve(position + 1))
-                        return true;
-                }
-            }
-
-            gameBoard[emptyCells[position].X][emptyCells[position].Y] = 0;
-            return false;
-        }
-
         public int solve2()
         {
 
@@ -120,35 +90,29 @@ namespace Sudoku
             {
                 for(; potentialCandidate < 10; potentialCandidate++)
                 {
-                    if(isValidNum(emptyCells[currentEmptyCell].X, emptyCells[currentEmptyCell].Y, potentialCandidate))
+                    if(isValidNum(new Point(emptyCells[currentEmptyCell].X, emptyCells[currentEmptyCell].Y), potentialCandidate))
                     {
-                        pan.Invalidate();
-                        Thread.Sleep(100);
                         gameBoard[emptyCells[currentEmptyCell].X][emptyCells[currentEmptyCell].Y] = potentialCandidate;
                         savedMoves.Push(potentialCandidate);
                         currentEmptyCell++;
                         potentialCandidate = 0;
 
+                        pan.Invalidate();
+                        Thread.Sleep(10);
+
                         if (isFilled())
-                        {
                             return 1;
-                        }
                     }
                 }
                 currentEmptyCell--;
                 potentialCandidate = savedMoves.Peek() + 1;
                 gameBoard[emptyCells[currentEmptyCell].X][emptyCells[currentEmptyCell].Y] = 0;
-                //pan.Invalidate();
-
                 savedMoves.Pop();
+
+                pan.Invalidate();
             }
         }
 
         public List<List<int>> GetCopy() => gameBoard;
-
-        public void delete(Point coords)
-        {
-            gameBoard[coords.Y / 40][coords.X / 40] = 0;
-        }
     }
 }

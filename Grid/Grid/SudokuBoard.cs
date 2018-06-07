@@ -11,7 +11,6 @@ namespace Sudoku
         private Board board;
         private BufferedPanel pan;
 
-
         public Game()
         {
             InitializeComponent();
@@ -21,7 +20,6 @@ namespace Sudoku
             drawer = new SudokuDrawer(ref board);
 
             this.KeyPreview = true;
-
         }
 
         Point clickedBox;
@@ -55,13 +53,11 @@ namespace Sudoku
 
             int clickedBoxCoordsX = (bufferedPanel1.PointToClient(Cursor.Position).X / squareSize) * squareSize;
             int clickedBoxCoordsY = (bufferedPanel1.PointToClient(Cursor.Position).Y / squareSize) * squareSize;
-
             clickedBox = new Point(clickedBoxCoordsX, clickedBoxCoordsY);  
+
             highlight = true;
 
             this.bufferedPanel1.Invalidate();
-
-
         }
 
         //Check for Keypresses
