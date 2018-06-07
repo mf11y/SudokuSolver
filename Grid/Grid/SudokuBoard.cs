@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -69,6 +70,7 @@ namespace Sudoku
 
                 if (keyPressed >= '0' && keyPressed <= '9')
                 {
+                    ClearButton.Enabled = true;
                     string num = keyPressed.ToString();
                     board.insertIntoBoard(new Point(clickedBox.Y / squareSize, clickedBox.X / squareSize), Int32.Parse(num));
                 }
@@ -78,13 +80,58 @@ namespace Sudoku
             this.bufferedPanel1.Invalidate();
         }
 
-        async private void solve_button(object sender, EventArgs e)
+        bool followBacktrack = false;
+
+        CancellationTokenSource cts;
+
+        async private void SolveButton_Click(object sender, EventArgs e)
         {
+            cts = new CancellationTokenSource();
+
+            bool solved = true;
+
             bufferedPanel1.Enabled = false;
-            button1.Enabled = false;
-            await Task.Run(() => board.solve2());
+            Solvebutton.Enabled = false;
+            CancelButton_.Enabled = true;
+
+            try
+            {
+                await Task.Run(() => board.solve2(followBacktrack, cts.Token));
+            }
+            catch(OperationCanceledException)
+            {
+                board.clear();
+                bufferedPanel1.Enabled = true;
+                Solvebutton.Enabled = true;
+                ClearButton.Enabled = false;
+                solved = false;
+            }
+
+            if(solved)
+                ClearButton.Enabled = true;
+
+            CancelButton_.Enabled = false;
             bufferedPanel1.Enabled = true;
-            button1.Enabled = true;
+
+            this.bufferedPanel1.Invalidate();
         }
+
+        private void FollowAlongCheck_Click(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+                followBacktrack = true;
+            else
+                followBacktrack = false;
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            board.clear();
+            Solvebutton.Enabled = true;
+            ClearButton.Enabled = false;
+            this.bufferedPanel1.Invalidate();
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e) => cts.Cancel();
     }
 }

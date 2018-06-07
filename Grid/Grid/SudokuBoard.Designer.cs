@@ -28,19 +28,55 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.Solvebutton = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.ClearButton = new System.Windows.Forms.Button();
+            this.CancelButton_ = new System.Windows.Forms.Button();
             this.bufferedPanel1 = new Sudoku.BufferedPanel();
             this.SuspendLayout();
             // 
-            // button1
+            // Solvebutton
             // 
-            this.button1.Location = new System.Drawing.Point(203, 33);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Solve";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.solve_button);
+            this.Solvebutton.Location = new System.Drawing.Point(65, 31);
+            this.Solvebutton.Name = "Solvebutton";
+            this.Solvebutton.Size = new System.Drawing.Size(75, 23);
+            this.Solvebutton.TabIndex = 1;
+            this.Solvebutton.Text = "Solve";
+            this.Solvebutton.UseVisualStyleBackColor = true;
+            this.Solvebutton.Click += new System.EventHandler(this.SolveButton_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(65, 60);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(158, 17);
+            this.checkBox1.TabIndex = 2;
+            this.checkBox1.Text = "Follow backtrack algorithm?";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Click += new System.EventHandler(this.FollowAlongCheck_Click);
+            // 
+            // ClearButton
+            // 
+            this.ClearButton.Enabled = false;
+            this.ClearButton.Location = new System.Drawing.Point(350, 31);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(75, 23);
+            this.ClearButton.TabIndex = 3;
+            this.ClearButton.Text = "Clear";
+            this.ClearButton.UseVisualStyleBackColor = true;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
+            // 
+            // CancelButton_
+            // 
+            this.CancelButton_.Enabled = false;
+            this.CancelButton_.Location = new System.Drawing.Point(207, 31);
+            this.CancelButton_.Name = "CancelButton_";
+            this.CancelButton_.Size = new System.Drawing.Size(75, 23);
+            this.CancelButton_.TabIndex = 4;
+            this.CancelButton_.Text = "Cancel";
+            this.CancelButton_.UseVisualStyleBackColor = true;
+            this.CancelButton_.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // bufferedPanel1
             // 
@@ -57,18 +93,25 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.CancelButton_);
+            this.Controls.Add(this.ClearButton);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.bufferedPanel1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Solvebutton);
             this.Name = "Game";
-            this.Text = "Form1";
+            this.Text = "Sudoku Solver";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Solvebutton;
         private BufferedPanel bufferedPanel1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button ClearButton;
+        private System.Windows.Forms.Button CancelButton_;
     }
 }
 

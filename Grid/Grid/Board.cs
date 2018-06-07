@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 using System.Threading;
-using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace Sudoku
 {
@@ -38,6 +33,13 @@ namespace Sudoku
             }
             else
                 return false;
+        }
+
+        public void clear()
+        {
+            for (int i = 0; i < gameBoard.Count(); i++)
+                for (int j = 0; j < gameBoard[i].Count(); j++)
+                    gameBoard[i][j] = 0;
         }
 
         public bool isValidNum(Point coords, int val)
@@ -79,9 +81,8 @@ namespace Sudoku
             return true;
         }
 
-        public int solve2()
+        public int solve2(bool follow, CancellationToken ct)
         {
-
             FindEmptyCells();
             //Saves which empty cell was just filled
             Stack<int> savedMoves = new Stack<int>();
@@ -90,26 +91,33 @@ namespace Sudoku
             {
                 for(; potentialCandidate < 10; potentialCandidate++)
                 {
+
                     if(isValidNum(new Point(emptyCells[currentEmptyCell].X, emptyCells[currentEmptyCell].Y), potentialCandidate))
                     {
+                        ct.ThrowIfCancellationRequested();
                         gameBoard[emptyCells[currentEmptyCell].X][emptyCells[currentEmptyCell].Y] = potentialCandidate;
                         savedMoves.Push(potentialCandidate);
                         currentEmptyCell++;
                         potentialCandidate = 0;
 
-                        pan.Invalidate();
-                        Thread.Sleep(10);
+                        if (follow)
+                        {
+                            pan.Invalidate();
+                            Thread.Sleep(10);
+                        }
 
                         if (isFilled())
                             return 1;
                     }
                 }
+                ct.ThrowIfCancellationRequested();
                 currentEmptyCell--;
                 potentialCandidate = savedMoves.Peek() + 1;
                 gameBoard[emptyCells[currentEmptyCell].X][emptyCells[currentEmptyCell].Y] = 0;
                 savedMoves.Pop();
 
-                pan.Invalidate();
+                if(follow)
+                    pan.Invalidate();
             }
         }
 
