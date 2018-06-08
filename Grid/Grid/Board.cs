@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+﻿/*
+ * 
+ * Class Responsible for board logic and holding data
+ * 
+*/
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
 using System.Threading;
@@ -7,10 +13,16 @@ namespace Sudoku
 {
     class Board
     {
+        //Where the numbers are held
         private List<List<int>> gameBoard = new List<List<int>>();
+
+        //Holds the coordinates of all the empty cells
         private List<Point> emptyCells= new List<Point>();
+
+        //Access to panel to call Invalidate(); Invalidate is thread safe
         BufferedPanel pan;
 
+        //Creates empty 9x9 Grid and initialized pan to panel in mainboard
         public Board(BufferedPanel p)
         {
             for (int i = 0; i < 9; i++)
@@ -23,7 +35,15 @@ namespace Sudoku
             pan = p;
         }
 
+        //Zeros out board. 0 = empty
+        public void clear()
+        {
+            for (int i = 0; i < gameBoard.Count(); i++)
+                for (int j = 0; j < gameBoard[i].Count(); j++)
+                    gameBoard[i][j] = 0;
+        }
 
+        //Responsible for inputting data in board
         public bool insertIntoBoard(Point coords, int val)
         {
             if (isValidNum(coords, val))
@@ -35,13 +55,7 @@ namespace Sudoku
                 return false;
         }
 
-        public void clear()
-        {
-            for (int i = 0; i < gameBoard.Count(); i++)
-                for (int j = 0; j < gameBoard[i].Count(); j++)
-                    gameBoard[i][j] = 0;
-        }
-
+        //Checks to see if incoming number conflicts with anything on board. Checks verical/horizontal/quadrant
         public bool isValidNum(Point coords, int val)
         {
             List<int> verticalCheck = new List<int>();
@@ -63,6 +77,7 @@ namespace Sudoku
                 return true;
         }
 
+        //Finds all the empty cells
         private void FindEmptyCells()
         {
             for (int i = 0; i < gameBoard.Count(); i++)
@@ -71,6 +86,7 @@ namespace Sudoku
                         emptyCells.Add(new Point(i, j));
         }
 
+        //checks to see if board has been filled
         bool isFilled()
         {
             for (int i = 0; i < gameBoard.Count(); i++)
@@ -81,10 +97,10 @@ namespace Sudoku
             return true;
         }
 
+        //Backtrack algorithm to solve puzzle
         public int solve2(bool follow, CancellationToken ct)
         {
             FindEmptyCells();
-            //Saves which empty cell was just filled
             Stack<int> savedMoves = new Stack<int>();
 
             for(int potentialCandidate = 1, currentEmptyCell = 0; true;)
@@ -95,6 +111,7 @@ namespace Sudoku
                     if(isValidNum(new Point(emptyCells[currentEmptyCell].X, emptyCells[currentEmptyCell].Y), potentialCandidate))
                     {
                         ct.ThrowIfCancellationRequested();
+
                         gameBoard[emptyCells[currentEmptyCell].X][emptyCells[currentEmptyCell].Y] = potentialCandidate;
                         savedMoves.Push(potentialCandidate);
                         currentEmptyCell++;
@@ -103,7 +120,7 @@ namespace Sudoku
                         if (follow)
                         {
                             pan.Invalidate();
-                            Thread.Sleep(10);
+                            Thread.Sleep(50);
                         }
 
                         if (isFilled())
@@ -111,6 +128,7 @@ namespace Sudoku
                     }
                 }
                 ct.ThrowIfCancellationRequested();
+
                 currentEmptyCell--;
                 potentialCandidate = savedMoves.Peek() + 1;
                 gameBoard[emptyCells[currentEmptyCell].X][emptyCells[currentEmptyCell].Y] = 0;
@@ -121,6 +139,7 @@ namespace Sudoku
             }
         }
 
+        //returns a copy of the data in board
         public List<List<int>> GetCopy() => gameBoard;
     }
 }

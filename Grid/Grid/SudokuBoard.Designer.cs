@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Game));
             this.Solvebutton = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.ClearButton = new System.Windows.Forms.Button();
             this.CancelButton_ = new System.Windows.Forms.Button();
-            this.bufferedPanel1 = new Sudoku.BufferedPanel();
+            this.GameBoardPanel = new Sudoku.BufferedPanel();
             this.SuspendLayout();
             // 
             // Solvebutton
@@ -78,14 +79,14 @@
             this.CancelButton_.UseVisualStyleBackColor = true;
             this.CancelButton_.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // bufferedPanel1
+            // GameBoardPanel
             // 
-            this.bufferedPanel1.Location = new System.Drawing.Point(65, 89);
-            this.bufferedPanel1.Name = "bufferedPanel1";
-            this.bufferedPanel1.Size = new System.Drawing.Size(360, 360);
-            this.bufferedPanel1.TabIndex = 0;
-            this.bufferedPanel1.Click += new System.EventHandler(this.P1_Click);
-            this.bufferedPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
+            this.GameBoardPanel.Location = new System.Drawing.Point(65, 89);
+            this.GameBoardPanel.Name = "GameBoardPanel";
+            this.GameBoardPanel.Size = new System.Drawing.Size(360, 360);
+            this.GameBoardPanel.TabIndex = 0;
+            this.GameBoardPanel.Click += new System.EventHandler(this.P1_Click);
+            this.GameBoardPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
             // Game
             // 
@@ -96,8 +97,9 @@
             this.Controls.Add(this.CancelButton_);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.bufferedPanel1);
+            this.Controls.Add(this.GameBoardPanel);
             this.Controls.Add(this.Solvebutton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Game";
             this.Text = "Sudoku Solver";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
@@ -108,7 +110,7 @@
 
         #endregion
         private System.Windows.Forms.Button Solvebutton;
-        private BufferedPanel bufferedPanel1;
+        private BufferedPanel GameBoardPanel;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Button CancelButton_;

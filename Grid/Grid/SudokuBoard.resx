@@ -117,4 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAGBgAAAEAIACICQAAFgAAACgAAAAYAAAAMAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AABoaGiwaGho8mlpafJpaWnyaGho8mlpafJpaWnyaGho8mlpafJpaWnyaGho8mlpafJpaWnyaWlp8mlp
+        afJpaWnyaWlp8mlpafJpaWnyaWlp8mlpafJpaWnyaWlp8mlpab5paWnmaWlp+mlpad5oaGjcaWlp3Glp
+        aepoaGj/aWlp7GlpadxpaWncaWlp3mhoaPppaWn6aGho3mlpadxpaWncaGho6mlpaf9paWnsaWlp3Glp
+        adxpaWneaGho+mlpafJpaWnmaGho4mlpaQhpaWkCaGhoAGlpaWppaWn/aWlpcgAAAAAAAAAAaGhoDmho
+        aNppaWniaWlpEgAAAAAAAAAAaWlpZGlpaf9paWl2aWlpAGlpaQJoaGgCaGho2mlpafJpaWnmaGho4Glp
+        aQYAAAAAAAAAAGhoaGppaWn/aWlpcgAAAAAAAAAAaWlpDmlpadpoaGjiaWlpEgAAAAAAAAAAaWlpZGho
+        aP9paWl2AAAAAAAAAAAAAAAAaWlp2GlpafJpaWnmaGho4GhoaAQAAAAAAAAAAGhoaGpoaGj/aWlpcgAA
+        AAAAAAAAaWlpDmlpadppaWniaWlpEgAAAAAAAAAAaWlpZGlpaf9oaGh2AAAAAAAAAAAAAAAAaWlp1mlp
+        afJpaWnmaWlp7GlpaXJpaWlwaGhocGhoaKxpaWn/aWlpsGhoaHBoaGhwaWlpeGlpaeppaWnuaWlpemho
+        aHBoaGhwaGhoqGlpaf9paWmyaWlpcGhoaHBoaGhwaWlp6GlpafJpaWnmaGho/2lpaf9oaGj/aWlp/2ho
+        aP9paWn/aWlp/2lpaf9paWn/aWlp/2lpaf9paWn/aWlp/2hoaP9paWn/aWlp/2hoaP9paWn/aWlp/2ho
+        aP9paWn/aWlp/2lpafJpaWnmaGho7GhoaG5oaGhqaGhoamlpaahoaGj/aWlprmlpaWppaWlqaWlpcmlp
+        aehpaWnuaWlpdmhoaGpoaGhqaWlppmlpaf9paWmwaGhoamhoaGpoaGhqaGho5mlpafJpaWnmaWlp4Gho
+        aAQAAAAAAAAAAGlpaWppaWn/aWlpcgAAAAAAAAAAaGhoDmhoaNppaWniaWlpEgAAAAAAAAAAaWlpZGlp
+        af9paWl2AAAAAAAAAAAAAAAAaGho1mlpafJpaWnmaWlp4GhoaAQAAAAAAAAAAGhoaGppaWn/aWlpcgAA
+        AAAAAAAAaWlpDmlpadpoaGjiaWlpEgAAAAAAAAAAaWlpZGhoaP9paWl2AAAAAAAAAAAAAAAAaWlp1mlp
+        afJpaWnmaGho4mlpaRRoaGgQaWlpEGlpaXRoaGj/aWlpfGlpaRBpaWkQaGhoHGhoaNxpaWnkaWlpIGlp
+        aRBpaWkQaGhobmlpaf9oaGiAaWlpEGlpaRBpaWkQaWlp2GlpafJpaWnmaWlp+mhoaN5paWneaWlp3mlp
+        aexpaWn/aWlp7Glpad5paWneaWlp4GlpafppaWn6aWlp4Glpad5paWneaWlp7Glpaf9paWnuaWlp3mlp
+        ad5paWneaWlp+GlpafJpaWnmaWlp+mlpad5paWneaGho3mlpaepoaGj/aWlp7Glpad5paWneaWlp4Gho
+        aPpoaGj6aWlp4Glpad5paWneaWlp6mlpaf9paWnsaGho3mlpad5paWneaWlp+GlpafJpaWnmaWlp4mho
+        aBRpaWkQaWlpEGlpaXRpaWn/aWlpemlpaRBpaWkQaWlpHGlpadxpaWnkaWlpIGlpaRBpaWkQaWlpbmlp
+        af9paWl+aGhoEGlpaRBpaWkQaWlp2GlpafJpaWnmaGho4GhoaAQAAAAAAAAAAGlpaWpoaGj/aWlpcgAA
+        AAAAAAAAaGhoDmhoaNpoaGjiaWlpEgAAAAAAAAAAaWlpZGhoaP9oaGh2AAAAAAAAAAAAAAAAaGho1mlp
+        afJpaWnmaWlp4GhoaAQAAAAAAAAAAGhoaGpoaGj/aWlpcgAAAAAAAAAAaGhoDmlpadppaWniaWlpEgAA
+        AAAAAAAAaGhoZGlpaf9oaGh2AAAAAAAAAAAAAAAAaGho1mlpafJpaWnmaGho7GlpaW5paWlsaWlpbGlp
+        aappaWn/aWlprmhoaGxpaWlsaGhodGlpaeppaWnuaWlpdmlpaWxoaGhsaWlppmlpaf9paWmwaWlpbGlp
+        aWxoaGhsaWlp5mlpafJpaWnmaWlp/2lpaf9paWn/aWlp/2lpaf9oaGj/aWlp/2hoaP9oaGj/aWlp/2ho
+        aP9oaGj/aGho/2hoaP9oaGj/aGho/2hoaP9oaGj/aGho/2hoaP9oaGj/aGho/2lpafJpaWnmaWlp7Glp
+        aXJpaWlwaWlpcGhoaKxpaWn/aGhosGhoaHBoaGhwaWlpeGlpaepoaGjuaGhoemhoaHBoaGhwaWlpqGho
+        aP9paWmyaGhocGhoaHBoaGhwaWlp6GlpafJoaGjmaGho4GhoaAQAAAAAAAAAAGhoaGppaWn/aWlpcgAA
+        AAAAAAAAaWlpDmhoaNppaWniaWlpEgAAAAAAAAAAaWlpZGlpaf9oaGh2AAAAAAAAAAAAAAAAaGho1mlp
+        afJpaWnmaGho4GlpaQQAAAAAAAAAAGlpaWpoaGj/aGhocgAAAAAAAAAAaWlpDmhoaNpoaGjiaWlpEgAA
+        AAAAAAAAaWlpZGhoaP9paWl2AAAAAAAAAAAAAAAAaGho2GlpafJpaWnmaWlp4GhoaAhpaWkAaGhoAGlp
+        aWppaWn/aGhocmhoaABoaGgAaWlpDmlpadppaWniaWlpEmhoaABoaGgAaWlpZmlpaf9paWl2aWlpAmho
+        aAJpaWkEaWlp2mlpafJpaWnmaWlp+mlpad5paWncaWlp3GlpaeppaWn/aWlp7GhoaNxoaGjcaGho3mlp
+        afppaWn6aWlp3mlpadxpaWncaWlp6mlpaf9paWnsaWlp3Glpad5paWneaWlp+mlpafJoaGiwaWlp8mlp
+        afJoaGjyaWlp8mlpafJoaGjyaWlp8mlpafJoaGjyaWlp8mlpafJpaWnyaWlp8mlpafJpaWnyaWlp8mlp
+        afJpaWnyaWlp8mlpafJpaWnyaWlp8mhoaLwAAAAAAAAAAD3nvAA957wAPee8ADjnHAAAAAAAOOccAD3n
+        vAA957wAPeecAAAAAAAAAAAAPee8AD3nvAA957wAOOccAAAAAAA45xwAPee8AD3nvAA957wAAAAAAAAA
+        AAA=
+</value>
+  </data>
 </root>
