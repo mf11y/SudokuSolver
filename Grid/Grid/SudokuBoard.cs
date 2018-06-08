@@ -94,6 +94,8 @@ namespace Sudoku
             boardInUse = false;
             GameBoardPanel.Enabled = false;
             Solvebutton.Enabled = false;
+            ClearButton.Enabled = false;
+            FollowCheckbox.Enabled = false;
             CancelButton_.Enabled = true;
 
             SolveAsync();
@@ -121,15 +123,14 @@ namespace Sudoku
             catch (OperationCanceledException)
             {
                 board.clear();
-                GameBoardPanel.Enabled = true;
                 Solvebutton.Enabled = true;
-                ClearButton.Enabled = false;
+                FollowCheckbox.Enabled = true;
                 solved = false;
             }
 
             if (solved)
                 ClearButton.Enabled = true;
-
+            
             CancelButton_.Enabled = false;
             GameBoardPanel.Enabled = true;
             GameBoardPanel.Invalidate();
@@ -140,7 +141,7 @@ namespace Sudoku
         //Checkbox if user wants to follow the algorith along
         private void FollowAlongCheck_Click(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
+            if (FollowCheckbox.Checked)
                 followAlgorithm = true;
             else
                 followAlgorithm = false;
@@ -152,6 +153,7 @@ namespace Sudoku
             board.clear();
             boardInUse = false;
             Solvebutton.Enabled = true;
+            FollowCheckbox.Enabled = true;
             ClearButton.Enabled = false;
             GameBoardPanel.Invalidate();
         }

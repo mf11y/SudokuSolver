@@ -80,6 +80,7 @@ namespace Sudoku
         //Finds all the empty cells
         private void FindEmptyCells()
         {
+            emptyCells.Clear();
             for (int i = 0; i < gameBoard.Count(); i++)
                 for (int j = 0; j < gameBoard[i].Count(); j++)
                     if (gameBoard[i][j] == 0)

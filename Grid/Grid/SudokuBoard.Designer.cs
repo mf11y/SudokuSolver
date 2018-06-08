@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Game));
             this.Solvebutton = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.FollowCheckbox = new System.Windows.Forms.CheckBox();
             this.ClearButton = new System.Windows.Forms.Button();
             this.CancelButton_ = new System.Windows.Forms.Button();
             this.GameBoardPanel = new Sudoku.BufferedPanel();
@@ -46,16 +46,16 @@
             this.Solvebutton.UseVisualStyleBackColor = true;
             this.Solvebutton.Click += new System.EventHandler(this.SolveButton_Click);
             // 
-            // checkBox1
+            // FollowCheckbox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(65, 60);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(158, 17);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Follow backtrack algorithm?";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.Click += new System.EventHandler(this.FollowAlongCheck_Click);
+            this.FollowCheckbox.AutoSize = true;
+            this.FollowCheckbox.Location = new System.Drawing.Point(65, 60);
+            this.FollowCheckbox.Name = "FollowCheckbox";
+            this.FollowCheckbox.Size = new System.Drawing.Size(158, 17);
+            this.FollowCheckbox.TabIndex = 2;
+            this.FollowCheckbox.Text = "Follow backtrack algorithm?";
+            this.FollowCheckbox.UseVisualStyleBackColor = true;
+            this.FollowCheckbox.Click += new System.EventHandler(this.FollowAlongCheck_Click);
             // 
             // ClearButton
             // 
@@ -96,7 +96,7 @@
             this.ClientSize = new System.Drawing.Size(484, 461);
             this.Controls.Add(this.CancelButton_);
             this.Controls.Add(this.ClearButton);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.FollowCheckbox);
             this.Controls.Add(this.GameBoardPanel);
             this.Controls.Add(this.Solvebutton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -111,7 +111,7 @@
         #endregion
         private System.Windows.Forms.Button Solvebutton;
         private BufferedPanel GameBoardPanel;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox FollowCheckbox;
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Button CancelButton_;
     }
