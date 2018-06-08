@@ -26,7 +26,7 @@ namespace Sudoku
         }
 
         //Variables used to draw grid
-        private static readonly Pen myPen = new Pen(Brushes.Black, 1);
+        private static readonly Pen myPen = new Pen(Brushes.White, 1);
         private const int NumLines = 10;
         private const int squareSize = 40;
         private const int linelength = squareSize * 9;
@@ -63,7 +63,7 @@ namespace Sudoku
         private static readonly Font myFont = new Font("Arial", 10);
 
         //Draws individual numbers into box
-        private void DrawInBox(Graphics e,string write, Point boxCoords) => e.DrawString(write, myFont, Brushes.Black, GetMiddleOfBox(boxCoords));
+        private void DrawInBox(Graphics e,string write, Point boxCoords) => e.DrawString(write, myFont, Brushes.White, GetMiddleOfBox(boxCoords));
 
         //Used to get middle of box to draw numbers
         private const int xOffset = 14;

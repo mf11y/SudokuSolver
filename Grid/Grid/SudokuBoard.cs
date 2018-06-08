@@ -74,17 +74,18 @@ namespace Sudoku
         {
             Graphics drawSurface = e.Graphics;
 
+            drawer.DrawBoard(drawSurface);
+
             if (boardInUse)
                 highLightBox(drawSurface);
 
-            drawer.DrawBoard(drawSurface);
         }
 
         //Used by paint to highlight active box
         private void highLightBox(Graphics e)
         {
             Rectangle rect = new Rectangle(new Point(clickedBox.X * squareSize, clickedBox.Y * squareSize), new Size(40, 40));
-            e.FillRectangle(Brushes.Wheat, rect);
+            e.FillRectangle(Brushes.White, rect);
         }
 
         //Handles what happens when solve button is clicked. Disabled buttons
@@ -149,6 +150,7 @@ namespace Sudoku
         private void ClearButton_Click(object sender, EventArgs e)
         {
             board.clear();
+            boardInUse = false;
             Solvebutton.Enabled = true;
             ClearButton.Enabled = false;
             GameBoardPanel.Invalidate();

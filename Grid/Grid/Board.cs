@@ -56,7 +56,7 @@ namespace Sudoku
         }
 
         //Checks to see if incoming number conflicts with anything on board. Checks verical/horizontal/quadrant
-        public bool isValidNum(Point coords, int val)
+        private bool isValidNum(Point coords, int val)
         {
             List<int> verticalCheck = new List<int>();
             List<int> quadrantCheck= new List<int>();
@@ -87,7 +87,7 @@ namespace Sudoku
         }
 
         //checks to see if board has been filled
-        bool isFilled()
+        private bool isFilled()
         {
             for (int i = 0; i < gameBoard.Count(); i++)
                 for (int j = 0; j < gameBoard[i].Count(); j++)
